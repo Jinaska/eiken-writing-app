@@ -60,19 +60,14 @@ const LEVELS = [
 ];
 
 const QUESTIONS = {
+  // 1級はPOINTSの提示なし（TOPICのみ。理由は自分で3つ考える）
   "grade-1": [
-    { id: "g1-1", topic: "Should developed nations accept more immigrants to address labor shortages?",
-      points: ["Economy", "Culture", "Public services", "Social integration"] },
-    { id: "g1-2", topic: "Is space exploration a worthwhile use of public funds?",
-      points: ["Scientific progress", "National prestige", "Cost", "Earthly priorities"] },
-    { id: "g1-3", topic: "Should governments do more to regulate the development of artificial intelligence?",
-      points: ["Safety", "Innovation", "Employment", "Privacy"] },
-    { id: "g1-4", topic: "Will renewable energy completely replace fossil fuels in the future?",
-      points: ["Technology", "Cost", "Infrastructure", "Politics"] },
-    { id: "g1-5", topic: "Should nuclear power be part of the world's energy future?",
-      points: ["Climate change", "Safety", "Waste disposal", "Cost"] },
-    { id: "g1-6", topic: "Is globalization beneficial to developing countries?",
-      points: ["Economic growth", "Cultural identity", "Inequality", "Labor rights"] },
+    { id: "g1-1", topic: "Should free access to clean water be a fundamental human right?", points: [] },
+    { id: "g1-2", topic: "Should developed nations accept more immigrants to address labor shortages?", points: [] },
+    { id: "g1-3", topic: "Is space exploration a worthwhile use of public funds?", points: [] },
+    { id: "g1-4", topic: "Should governments do more to regulate the development of artificial intelligence?", points: [] },
+    { id: "g1-5", topic: "Should nuclear power be part of the world's energy future?", points: [] },
+    { id: "g1-6", topic: "Is globalization beneficial to developing countries?", points: [] },
   ],
   "grade-pre-1": [
     { id: "p1-1", topic: "Should companies actively encourage employees to work remotely?",

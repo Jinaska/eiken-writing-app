@@ -33,7 +33,7 @@ module.exports = async function handler(req, res) {
 
   const {
     mode, level, topic, points = [], wordTarget, essay,
-    usePoints = 0, instructions = [],
+    usePoints = 0, reasons = 0, instructions = [],
   } = body;
   if (!topic) return res.status(400).json({ error: "topicがありません。" });
 
@@ -44,12 +44,19 @@ module.exports = async function handler(req, res) {
 
   // POINTSの使い方ルール（公式形式に準拠）
   const pointsRule = usePoints
-    ? `この問題は、上のPOINTS（${points.length}個）の中から${usePoints}つを選んで使う形式です。` +
+    ? `この問題は、上のPOINTS（${points.length}個）の中から${usePoints}つを「選んで使う」形式です（準1級など）。` +
       `${usePoints}つを適切に使って論を展開していれば内容点は満点を与えてよく、` +
       `残りのPOINTSに触れていなくても減点しないでください。` +
-      `選んだPOINTSが${usePoints}つに満たない、またはお題から外れている場合のみ内容点を下げてください。`
-    : `POINTSは内容を考えるための参考情報です。すべてに触れる必要はありません。` +
-      `お題に対して自分の意見と理由が明確に書けているかで内容点を判断してください。`;
+      `選んだPOINTSが${usePoints}つに満たない場合のみ内容点を下げてください。`
+    : `この問題は「自分の意見＋理由を${reasons || 2}つ」書く形式です（2級など）。` +
+      `POINTSはあくまで理由を考えるための参考であり、POINTS以外の観点から理由を書いても全く問題ありません。` +
+      `POINTSを使ったか・いくつ使ったかでは絶対に減点しないでください。` +
+      `理由が${reasons || 2}つ明確に述べられ、意見が一貫しているかで内容点を判断してください。`;
+
+  // お題ずれの扱い（公式の減点ルール）
+  const offTopicRule =
+    `重要: 解答がTOPIC（QUESTION）の問いの答えになっていない、` +
+    `またはお題から大きく外れていると判断される場合は、内容点を0点とし、総合点も最低レベルにしてください。`;
 
   let systemPrompt, userPrompt;
 
@@ -80,7 +87,7 @@ module.exports = async function handler(req, res) {
       `お題: ${topic}\n` +
       `指示(instructions):\n${instrText}\n` +
       `POINTS: ${pointsText}\n` +
-      `# 重要な採点ルール\n${pointsRule}\n\n` +
+      `# 重要な採点ルール\n${pointsRule}\n${offTopicRule}\n\n` +
       `目安語数: ${wordTarget}\n\n` +
       `# 学習者の解答\n${essay}\n\n` +
       `# 出力形式（このJSONのみ。コードブロックも不要）\n` +

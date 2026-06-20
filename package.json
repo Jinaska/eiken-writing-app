@@ -1,0 +1,10 @@
+{
+  "name": "eiken-writing-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI採点つき英作文ライティング練習アプリ",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  }
+}

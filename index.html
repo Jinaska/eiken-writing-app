@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>英作文トレーナー | AI採点つきライティング練習</title>
+  <meta name="description" content="英検形式のライティング練習を、AI採点つきで。3級〜1級のお題で英作文を書いて、その場で採点とフィードバックがもらえます。" />
+  <meta name="theme-color" content="#5b8233" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a href="./index.html" class="logo">英作文トレーナー</a>
+      <span class="tag">AI採点つきライティング練習</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1 class="page-title">英作文を書いて、AIに採点してもらおう</h1>
+    <p class="lead">
+      レベルを選んで、お題に沿って英作文を書くだけ。観点別のスコアと
+      具体的な改善フィードバック、模範解答がその場で手に入ります。
+    </p>
+
+    <div class="grid" id="level-grid"></div>
+
+    <h2 style="margin-top:36px;font-size:18px;">使い方</h2>
+    <ol style="color:var(--muted);font-size:14px;padding-left:20px;">
+      <li>レベルを選ぶ（3級〜1級）</li>
+      <li>気になるお題で「この問題で採点」を押す</li>
+      <li>英作文を入力して「AI採点する」を押す</li>
+      <li>スコア・フィードバック・模範解答を確認する</li>
+    </ol>
+  </main>
+
+  <footer class="footer">
+    英作文トレーナー — 英語学習用の練習アプリ<br />
+    ※「英検」は公益財団法人 日本英語検定協会の登録商標です。本アプリは同協会とは関係ありません。
+  </footer>
+
+  <script src="./questions-data.js"></script>
+  <script>
+    const descByLevel = {
+      "grade-1": "200〜240語の本格エッセイ",
+      "grade-pre-1": "120〜150語の意見論述",
+      "grade-2": "80〜100語の意見論述",
+      "grade-pre-2": "50〜60語の短い意見",
+      "grade-3": "25〜35語の質問応答",
+    };
+    const grid = document.getElementById("level-grid");
+    LEVELS.forEach((lv) => {
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = `./questions.html?level=${lv.id}`;
+      a.innerHTML = `<h3>${lv.label}</h3><p>${descByLevel[lv.id] || lv.words}</p>`;
+      grid.appendChild(a);
+    });
+  </script>
+</body>
+</html>

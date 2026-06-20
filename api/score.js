@@ -43,15 +43,27 @@ module.exports = async function handler(req, res) {
     : "（指定なし）";
 
   // POINTSの使い方ルール（公式形式に準拠）
-  const pointsRule = usePoints
-    ? `この問題は、上のPOINTS（${points.length}個）の中から${usePoints}つを「選んで使う」形式です（準1級など）。` +
+  let pointsRule;
+  if (usePoints) {
+    // 準1級など: POINTSから指定数を選んで使う
+    pointsRule =
+      `この問題は、上のPOINTS（${points.length}個）の中から${usePoints}つを「選んで使う」形式です（準1級など）。` +
       `${usePoints}つを適切に使って論を展開していれば内容点は満点を与えてよく、` +
       `残りのPOINTSに触れていなくても減点しないでください。` +
-      `選んだPOINTSが${usePoints}つに満たない場合のみ内容点を下げてください。`
-    : `この問題は「自分の意見＋理由を${reasons || 2}つ」書く形式です（2級など）。` +
+      `選んだPOINTSが${usePoints}つに満たない場合のみ内容点を下げてください。`;
+  } else if (points.length) {
+    // 2級など: POINTSは参考。使わなくてよい
+    pointsRule =
+      `この問題は「自分の意見＋理由を${reasons || 2}つ」書く形式です（2級など）。` +
       `POINTSはあくまで理由を考えるための参考であり、POINTS以外の観点から理由を書いても全く問題ありません。` +
       `POINTSを使ったか・いくつ使ったかでは絶対に減点しないでください。` +
       `理由が${reasons || 2}つ明確に述べられ、意見が一貫しているかで内容点を判断してください。`;
+  } else {
+    // 1級など: POINTSの提示なし。理由を自分で挙げる
+    pointsRule =
+      `この問題はPOINTSの提示がなく、自分の意見に対して理由を${reasons || 3}つ挙げて論じる形式です（1級など）。` +
+      `理由が${reasons || 3}つ明確で説得力があるか、導入・本論・結論の構成が整っているかで内容点を判断してください。`;
+  }
 
   // お題ずれの扱い（公式の減点ルール）
   const offTopicRule =

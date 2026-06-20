@@ -29,7 +29,7 @@
     if (q.points && q.points.length) {
       const label = level.usePoints
         ? `POINTS（この中から${level.usePoints}つ選んで使う）`
-        : "POINTS（参考）";
+        : "POINTS（理由の参考。これ以外でもOK）";
       pointsHtml =
         `<div class="q-points-label">${label}</div>` +
         `<div class="q-points">${q.points

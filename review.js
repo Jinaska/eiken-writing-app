@@ -36,7 +36,7 @@
   if (q && q.points && q.points.length) {
     const label = level.usePoints
       ? `POINTS（この中から${level.usePoints}つ選んで使う）`
-      : "POINTS（参考）";
+      : "POINTS（理由の参考。これ以外の観点で書いてもOK）";
     promptHtml +=
       `<div class="q-points-label" style="margin-top:10px;">${label}</div>` +
       `<div class="q-points">${q.points
@@ -119,6 +119,7 @@
         topic: q.topic,
         points: q.points || [],
         usePoints: level.usePoints || 0,
+        reasons: level.reasons || 0,
         instructions: level.instructions || [],
         wordTarget: level.words,
         essay: essay,
@@ -187,6 +188,7 @@
         topic: q.topic,
         points: q.points || [],
         usePoints: level.usePoints || 0,
+        reasons: level.reasons || 0,
         instructions: level.instructions || [],
         wordTarget: level.words,
       });

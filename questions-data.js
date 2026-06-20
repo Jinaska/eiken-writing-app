@@ -6,12 +6,13 @@
    - type: "opinion" 意見論述 / "qa" 質問応答（3級など）
    ============================================================ */
 
-// usePoints: POINTSのうち「使うべき数」。0なら参考(任意)扱い。
-// instructions: 公式形式に倣った指示文（採点画面・問題一覧に表示）
+// usePoints: 「POINTSの中から選んで使う数」。0ならPOINTSは参考(任意)扱い。
+// reasons:   求められる理由の数（reasonベースの級で使用）。
+// instructions: 実際の試験に倣った指示文。1級・準1級は英語、2級以下は日本語。
 const LEVELS = [
   {
     id: "grade-1", label: "1級", words: "200〜240語", type: "opinion",
-    usePoints: 0,
+    usePoints: 0, reasons: 3,
     instructions: [
       "Write an essay on the given TOPIC.",
       "Give THREE reasons to support your answer.",
@@ -21,7 +22,7 @@ const LEVELS = [
   },
   {
     id: "grade-pre-1", label: "準1級", words: "120〜150語", type: "opinion",
-    usePoints: 2,
+    usePoints: 2, reasons: 0,
     instructions: [
       "Write an essay on the given TOPIC.",
       "Use TWO of the POINTS below to support your answer.",
@@ -31,30 +32,29 @@ const LEVELS = [
   },
   {
     id: "grade-2", label: "2級", words: "80〜100語", type: "opinion",
-    usePoints: 2,
+    usePoints: 0, reasons: 2,
     instructions: [
-      "Write an essay on the given TOPIC.",
-      "Use TWO of the POINTS below to support your answer.",
-      "Structure: introduction, main body, and conclusion",
-      "Suggested length: 80–100 words",
+      "以下のTOPICについて、あなたの意見とその理由を2つ書きなさい。",
+      "POINTSは理由を書く際の参考となる観点を示したものです。ただし、これら以外の観点から理由を書いてもかまいません。",
+      "語数の目安は80語〜100語です。",
+      "解答がTOPICに示された問いの答えになっていない場合や、TOPICからずれていると判断された場合は、0点と採点されることがあります。TOPICの内容をよく読んでから答えてください。",
     ],
   },
   {
     id: "grade-pre-2", label: "準2級", words: "50〜60語", type: "opinion",
-    usePoints: 0,
+    usePoints: 0, reasons: 2,
     instructions: [
-      "Answer the question.",
-      "Give TWO reasons to support your answer.",
-      "Suggested length: 50–60 words",
+      "以下のQUESTIONについて、あなたの意見とその理由を2つ書きなさい。",
+      "POINTSは理由を書く際の参考です。これら以外の観点から書いてもかまいません。",
+      "語数の目安は50語〜60語です。",
     ],
   },
   {
     id: "grade-3", label: "3級", words: "25〜35語", type: "qa",
-    usePoints: 0,
+    usePoints: 0, reasons: 2,
     instructions: [
-      "Answer the question.",
-      "Give TWO reasons to support your answer.",
-      "Suggested length: 25–35 words",
+      "QUESTIONについて、あなたの考えとその理由を2つ書きなさい。",
+      "語数の目安は25語〜35語です。",
     ],
   },
 ];
@@ -101,6 +101,8 @@ const QUESTIONS = {
       points: ["Safety", "Communication", "Health"] },
     { id: "g2-6", topic: "Do you think more people will work from home in the future?",
       points: ["Technology", "Commuting", "Communication"] },
+    { id: "g2-7", topic: "In some Japanese university programs, students must study abroad for one year. Do you think the number of such programs will increase in the future?",
+      points: ["Cost", "Work", "Communication"] },
   ],
   "grade-pre-2": [
     { id: "pp2-1", topic: "Which do you like better, studying in the morning or at night?",

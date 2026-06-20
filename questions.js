@@ -27,8 +27,11 @@
 
     let pointsHtml = "";
     if (q.points && q.points.length) {
+      const label = level.usePoints
+        ? `POINTS（この中から${level.usePoints}つ選んで使う）`
+        : "POINTS（参考）";
       pointsHtml =
-        `<div class="q-points-label">POINTS</div>` +
+        `<div class="q-points-label">${label}</div>` +
         `<div class="q-points">${q.points
           .map((p) => `<span>${p}</span>`)
           .join("")}</div>`;

@@ -6,12 +6,57 @@
    - type: "opinion" 意見論述 / "qa" 質問応答（3級など）
    ============================================================ */
 
+// usePoints: POINTSのうち「使うべき数」。0なら参考(任意)扱い。
+// instructions: 公式形式に倣った指示文（採点画面・問題一覧に表示）
 const LEVELS = [
-  { id: "grade-1",     label: "1級",   words: "200〜240語", type: "opinion" },
-  { id: "grade-pre-1", label: "準1級", words: "120〜150語", type: "opinion" },
-  { id: "grade-2",     label: "2級",   words: "80〜100語",  type: "opinion" },
-  { id: "grade-pre-2", label: "準2級", words: "50〜60語",   type: "opinion" },
-  { id: "grade-3",     label: "3級",   words: "25〜35語",   type: "qa" },
+  {
+    id: "grade-1", label: "1級", words: "200〜240語", type: "opinion",
+    usePoints: 0,
+    instructions: [
+      "Write an essay on the given TOPIC.",
+      "Give THREE reasons to support your answer.",
+      "Structure: introduction, main body, and conclusion",
+      "Suggested length: 200–240 words",
+    ],
+  },
+  {
+    id: "grade-pre-1", label: "準1級", words: "120〜150語", type: "opinion",
+    usePoints: 2,
+    instructions: [
+      "Write an essay on the given TOPIC.",
+      "Use TWO of the POINTS below to support your answer.",
+      "Structure: introduction, main body, and conclusion",
+      "Suggested length: 120–150 words",
+    ],
+  },
+  {
+    id: "grade-2", label: "2級", words: "80〜100語", type: "opinion",
+    usePoints: 2,
+    instructions: [
+      "Write an essay on the given TOPIC.",
+      "Use TWO of the POINTS below to support your answer.",
+      "Structure: introduction, main body, and conclusion",
+      "Suggested length: 80–100 words",
+    ],
+  },
+  {
+    id: "grade-pre-2", label: "準2級", words: "50〜60語", type: "opinion",
+    usePoints: 0,
+    instructions: [
+      "Answer the question.",
+      "Give TWO reasons to support your answer.",
+      "Suggested length: 50–60 words",
+    ],
+  },
+  {
+    id: "grade-3", label: "3級", words: "25〜35語", type: "qa",
+    usePoints: 0,
+    instructions: [
+      "Answer the question.",
+      "Give TWO reasons to support your answer.",
+      "Suggested length: 25–35 words",
+    ],
+  },
 ];
 
 const QUESTIONS = {

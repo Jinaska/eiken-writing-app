@@ -25,13 +25,25 @@
   $("word-target").textContent = `目安: ${level.words}`;
   $("back-link").href = `./questions.html?level=${levelId}`;
 
+  // 指示文（公式形式）＋ POINTS を表示
+  let promptHtml = "";
+  if (level.instructions && level.instructions.length) {
+    promptHtml +=
+      `<ul class="instructions">${level.instructions
+        .map((line) => `<li>${line}</li>`)
+        .join("")}</ul>`;
+  }
   if (q && q.points && q.points.length) {
-    $("points-wrap").innerHTML =
-      `<div class="q-points-label" style="margin-top:8px;">POINTS</div>` +
+    const label = level.usePoints
+      ? `POINTS（この中から${level.usePoints}つ選んで使う）`
+      : "POINTS（参考）";
+    promptHtml +=
+      `<div class="q-points-label" style="margin-top:10px;">${label}</div>` +
       `<div class="q-points">${q.points
         .map((p) => `<span>${p}</span>`)
         .join("")}</div>`;
   }
+  $("points-wrap").innerHTML = promptHtml;
 
   // ---- 下書き自動保存（localStorage） -------------------------------------
   const draftKey = `draft:${levelId}:${q ? q.id : "x"}`;
@@ -106,6 +118,8 @@
         levelId: levelId,
         topic: q.topic,
         points: q.points || [],
+        usePoints: level.usePoints || 0,
+        instructions: level.instructions || [],
         wordTarget: level.words,
         essay: essay,
       });
@@ -172,6 +186,8 @@
         levelId: levelId,
         topic: q.topic,
         points: q.points || [],
+        usePoints: level.usePoints || 0,
+        instructions: level.instructions || [],
         wordTarget: level.words,
       });
       localStorage.setItem(cacheKey, data.model || "");

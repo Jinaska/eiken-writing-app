@@ -91,8 +91,6 @@ const QUESTIONS = {
       points: ["Cost", "Student health", "Learning effectiveness", "Sustainability"] },
     { id: "p1-5", topic: "Should artificial intelligence take over most customer-service jobs?",
       points: ["Efficiency", "Employment", "Customer satisfaction", "Innovation"] },
-    { id: "p1-6", topic: "Should employers adopt a four-day workweek?",
-      points: ["Productivity", "Employee satisfaction", "Business costs", "Competitiveness"] },
     { id: "p1-7", topic: "Should companies adopt a four-day workweek?",
       points: ["Productivity", "Cost", "Work-life balance", "Customer service"] },
     { id: "p1-8", topic: "Should universities offer more online courses?",

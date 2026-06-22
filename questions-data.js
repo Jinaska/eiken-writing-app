@@ -138,6 +138,47 @@ const QUESTIONS = {
   ],
 };
 
+// ============================================================
+//  英文要約（English Summary）データ ※準1級のみ
+//  - passage: 要約する本文
+//  - officialModel があれば公式の解答例として表示（無ければAI生成）
+// ============================================================
+const SUMMARY_META = {
+  "grade-pre-1": {
+    words: "60〜70語",
+    instructions: [
+      "Read the article below and summarize it in your own words as far as possible in English.",
+      "Summarize it between 60 and 70 words.",
+      "Write your summary in the space provided.",
+    ],
+  },
+};
+
+const SUMMARIES = {
+  "grade-pre-1": [
+    {
+      id: "sum-p1-1",
+      title: "Water Fluoridation（2026年度第1回 過去問）",
+      passage:
+        "Fluoride is a naturally occurring mineral found in water and soil. In the early twentieth century, researchers observed that people in certain regions had fewer dental problems after drinking water containing fluoride. Based on these findings, governments in several countries introduced water fluoridation as a public health policy, and it is now practiced in many urban areas.\n\nSupporters believe that adding fluoride to water improves dental health in practical ways. In communities where dental clinics are limited, residents may only visit a dentist once every few years due to cost or travel distance. By including fluoride in tap water, protection is provided daily without requiring clinic visits. In addition, fluoride reaches children at school, office workers, and elderly people at home equally, regardless of income or personal routines.\n\nHowever, critics express concerns about possible negative effects. One issue is that individuals consume different amounts of water depending on factors such as age, physical activity, or climate. For example, people working outdoors may drink much more water than others. This makes it difficult to control individual intake. Another concern is that some people may rely too much on fluoridated water and reduce personal dental care, which can result in undetected problems.",
+      officialModel:
+        "Fluoride has long been added to public water supplies as a health policy to improve dental health. It benefits people with limited access to dental care by reaching them through the water supply without requiring individual effort. However, safe intake levels are difficult to control because water consumption varies among individuals, and relying too much on fluoridated water may reduce personal dental care and lead to oral problems.",
+    },
+    {
+      id: "sum-p1-2",
+      title: "Remote Work（練習用）",
+      passage:
+        "Remote work, in which employees do their jobs from home or other locations outside a central office, has become far more common in recent years. Improvements in internet technology and video communication tools have made it possible for many tasks to be completed without being physically present in an office.\n\nSupporters argue that remote work brings clear benefits. Employees save the time and money that they would otherwise spend commuting, and they can use these hours for rest or family. Companies, too, can reduce the cost of office space and hire talented workers regardless of where they live. Many workers report that they feel more focused when they can design their own working environment.\n\nOn the other hand, some experts point out problems. When team members rarely meet in person, communication can become slower, and new employees may find it harder to learn from experienced colleagues. In addition, the line between work and private life can blur, leading some people to work longer hours than before. Managers may also struggle to evaluate performance fairly when they cannot directly observe how their staff work.",
+    },
+    {
+      id: "sum-p1-3",
+      title: "Electric Vehicles（練習用）",
+      passage:
+        "Electric vehicles, which run on electricity stored in batteries rather than on gasoline, have attracted growing attention as countries try to reduce air pollution. Many governments now encourage their use through tax reductions and the construction of charging stations.\n\nSupporters believe that electric vehicles offer important advantages. Because they produce no exhaust gases while driving, they can improve air quality in crowded cities. They are also generally cheaper to run, since electricity often costs less than gasoline and the motors require less maintenance. As more drivers switch, dependence on imported oil may also decrease.\n\nHowever, critics raise several concerns. Producing the batteries requires rare metals, and mining these materials can damage the environment. The electricity used to charge the cars may also come from power plants that burn coal or gas, which reduces the overall benefit. Furthermore, in many areas there are still too few charging stations, and fully charging a battery takes much longer than filling a tank with fuel, which can be inconvenient on long trips.",
+    },
+  ],
+};
+
 // 級idからメタ情報を引く
 function getLevel(id) {
   return LEVELS.find((l) => l.id === id) || LEVELS[1];

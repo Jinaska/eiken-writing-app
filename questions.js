@@ -19,6 +19,20 @@
   const level = getLevel(levelId);
   titleEl.textContent = `${level.label} ライティング予想問題`;
 
+  // 英文要約がある級（準1級など）は、要約練習への導線を出す
+  const hasSummary =
+    typeof SUMMARIES !== "undefined" &&
+    SUMMARIES[levelId] &&
+    SUMMARIES[levelId].length;
+  if (hasSummary) {
+    const sw = document.createElement("div");
+    sw.className = "task-switch";
+    sw.innerHTML =
+      `<span class="btn btn-primary" style="cursor:default;pointer-events:none;">意見論述</span>` +
+      `<a class="btn btn-outline" href="./summary.html?level=${levelId}">英文要約を練習する →</a>`;
+    listEl.parentNode.insertBefore(sw, listEl);
+  }
+
   // 問題カード描画
   const qs = QUESTIONS[levelId] || [];
   qs.forEach((q, i) => {

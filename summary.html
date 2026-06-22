@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>英文要約 | 英作文トレーナー</title>
+  <meta name="theme-color" content="#5b8233" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a href="./index.html" class="logo">英作文トレーナー</a>
+      <span class="tag">AI採点つきライティング練習</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <a href="#" id="back-link" class="back-link">← 問題一覧へ</a>
+
+    <div class="prompt-box">
+      <div class="q-num" id="level-label"></div>
+      <div class="q-topic" id="title" style="font-size:17px;"></div>
+      <div id="instructions-wrap"></div>
+      <div style="font-size:13px;color:var(--muted);" id="word-target"></div>
+    </div>
+
+    <div class="q-points-label" style="margin-bottom:6px;">本文（ARTICLE）</div>
+    <div class="passage" id="passage"></div>
+
+    <div class="q-points-label" style="margin:6px 0;">あなたの要約（SUMMARY）</div>
+    <textarea id="essay" placeholder="ここに英語で要約を入力してください…"></textarea>
+    <div class="meta-row">
+      <span class="word-count" id="word-count">0 words</span>
+      <span id="save-state"></span>
+    </div>
+
+    <div class="q-actions">
+      <button class="btn btn-primary" id="score-btn">AI採点する</button>
+      <button class="btn btn-outline" id="model-btn">模範解答を見る</button>
+    </div>
+
+    <div id="error" class="error-box" style="display:none;"></div>
+    <div id="result"></div>
+    <div id="model-result"></div>
+  </main>
+
+  <footer class="footer">英作文トレーナー — 英語学習用の練習アプリ</footer>
+
+  <script src="./questions-data.js"></script>
+  <script src="./summary.js"></script>
+</body>
+</html>

@@ -93,6 +93,10 @@ const QUESTIONS = {
       points: ["Efficiency", "Employment", "Customer satisfaction", "Innovation"] },
     { id: "p1-6", topic: "Should employers adopt a four-day workweek?",
       points: ["Productivity", "Employee satisfaction", "Business costs", "Competitiveness"] },
+    { id: "p1-7", topic: "Should companies adopt a four-day workweek?",
+      points: ["Productivity", "Cost", "Work-life balance", "Customer service"] },
+    { id: "p1-8", topic: "Should universities offer more online courses?",
+      points: ["Cost", "Convenience", "Quality of education", "Student interaction"] },
   ],
   "grade-2": [
     { id: "g2-1", topic: "Do you think students should have a part-time job while in school?",
@@ -175,6 +179,18 @@ const SUMMARIES = {
       title: "Electric Vehicles（練習用）",
       passage:
         "Electric vehicles, which run on electricity stored in batteries rather than on gasoline, have attracted growing attention as countries try to reduce air pollution. Many governments now encourage their use through tax reductions and the construction of charging stations.\n\nSupporters believe that electric vehicles offer important advantages. Because they produce no exhaust gases while driving, they can improve air quality in crowded cities. They are also generally cheaper to run, since electricity often costs less than gasoline and the motors require less maintenance. As more drivers switch, dependence on imported oil may also decrease.\n\nHowever, critics raise several concerns. Producing the batteries requires rare metals, and mining these materials can damage the environment. The electricity used to charge the cars may also come from power plants that burn coal or gas, which reduces the overall benefit. Furthermore, in many areas there are still too few charging stations, and fully charging a battery takes much longer than filling a tank with fuel, which can be inconvenient on long trips.",
+    },
+    {
+      id: "sum-p1-4",
+      title: "Voluntourism（追加練習）",
+      passage:
+        "Combining travel with volunteer work has become popular in recent years. People who do this are sometimes called \"voluntourists.\" They travel to other countries and spend part of their trip helping local communities. For example, they might build houses, teach English to children, or take care of animals at shelters.\n\nThere are good reasons why voluntourism is growing. Many people want their travel to have meaning, not just be for fun. Volunteers often feel proud when they help others, and they learn about new cultures more deeply than ordinary tourists. The communities also benefit from extra workers and from the money the volunteers spend in local shops.\n\nHowever, some experts have concerns about voluntourism. Untrained volunteers sometimes do work poorly, and local workers may lose jobs because tourists do the same work for free. In some areas, children grow used to seeing new visitors every few weeks, and this can affect their emotions. For these reasons, organizations are now asking voluntourists to choose programs carefully.",
+    },
+    {
+      id: "sum-p1-5",
+      title: "Electric Bicycles in Cities（追加練習）",
+      passage:
+        "In many cities around the world, electric bicycles, often called e-bikes, are becoming a common sight on the streets. An e-bike looks similar to a regular bicycle, but it has a small motor and a battery. When the rider pushes the pedals, the motor helps them, which makes it easier to go up hills or travel longer distances.\n\nE-bikes offer several benefits. Riders can reach places faster than walking and arrive without feeling too tired, even on hot days. E-bikes also do not produce harmful gases like cars do, so they are better for the air in busy cities. In addition, they take up less space on roads, which can help reduce traffic.\n\nHowever, e-bikes also bring some problems. Because they move faster than ordinary bicycles, accidents involving pedestrians have increased in some places. The batteries inside e-bikes can also catch fire if they are damaged or charged incorrectly. To deal with these issues, several cities have started making new traffic rules for e-bike riders.",
     },
   ],
 };

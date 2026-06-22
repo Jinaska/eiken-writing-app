@@ -33,9 +33,15 @@ module.exports = async function handler(req, res) {
 
   const {
     mode, level, topic, points = [], wordTarget, essay,
-    usePoints = 0, reasons = 0, instructions = [],
+    usePoints = 0, reasons = 0, instructions = [], passage,
   } = body;
-  if (!topic) return res.status(400).json({ error: "topicがありません。" });
+
+  const isSummary = mode === "summary" || mode === "summary-model";
+  if (isSummary) {
+    if (!passage) return res.status(400).json({ error: "passageがありません。" });
+  } else if (!topic) {
+    return res.status(400).json({ error: "topicがありません。" });
+  }
 
   const pointsText = points.length ? points.join(", ") : "（指定なし）";
   const instrText = instructions.length
@@ -70,9 +76,54 @@ module.exports = async function handler(req, res) {
     `重要: 解答がTOPIC（QUESTION）の問いの答えになっていない、` +
     `またはお題から大きく外れていると判断される場合は、内容点を0点とし、総合点も最低レベルにしてください。`;
 
+  // 要約の採点ルール（英検 英文要約の観点）
+  const summaryRule =
+    `これは英検の「英文要約（English Summary）」の採点です。受験者は本文(ARTICLE)を読み、` +
+    `自分の言葉で${wordTarget}に要約します。次の方針で4観点（内容/構成/語彙/文法）各0〜4点・計16点で採点してください。\n` +
+    `- 内容: 本文の主要なポイント（賛成側・反対側などの要点）を過不足なく正確に捉えているか。本文に無い情報や自分の意見・例を加えていないか（加えていれば減点）。\n` +
+    `- 構成: 要点が論理的につながり、要約として一つのまとまりになっているか。\n` +
+    `- 語彙: 本文の表現を丸写しせず、自分の言葉で言い換え(paraphrase)できているか。語彙が適切か。\n` +
+    `- 文法: 文法・綴りが正確か。\n` +
+    `重要: 要約になっておらず本文の主旨から外れている場合や、本文の文をそのまま写しているだけの場合は内容点を大きく下げてください。`;
+
   let systemPrompt, userPrompt;
 
-  if (mode === "model") {
+  if (mode === "summary-model") {
+    // ---------- 要約の模範解答生成 ----------
+    systemPrompt =
+      "あなたは英検ライティング指導の専門家です。与えられた本文(ARTICLE)を読み、" +
+      "英検英文要約の満点に値する模範要約を英語で書いてください。" +
+      "本文の主要点を自分の言葉でまとめ、自分の意見や本文にない情報は加えないでください。";
+    userPrompt =
+      `レベル: ${level}\n` +
+      `要約の語数の目安: ${wordTarget}\n\n` +
+      `# 本文(ARTICLE)\n${passage}\n\n` +
+      `上記を${wordTarget}で要約した模範解答を、英語のみで書いてください。前置きや説明は不要です。`;
+  } else if (mode === "summary") {
+    // ---------- 要約の採点 ----------
+    systemPrompt =
+      "あなたは英検ライティングの採点官です。英文要約を4観点（内容/構成/語彙/文法）で" +
+      "それぞれ0〜4点、合計16点満点で採点します。フィードバックは日本語で、" +
+      "学習者が次に何を直せばよいか具体的に書いてください。" +
+      "必ず指定したJSON形式のみで出力し、JSON以外の文字は一切出力しないでください。";
+    userPrompt =
+      `# 採点ルール\n${summaryRule}\n\n` +
+      `# 本文(ARTICLE)\n${passage}\n\n` +
+      `# 学習者の要約(SUMMARY)\n${essay}\n\n` +
+      `# 出力形式（このJSONのみ。コードブロックも不要）\n` +
+      `{\n` +
+      `  "total": 合計点(0-16の整数),\n` +
+      `  "maxTotal": 16,\n` +
+      `  "criteria": [\n` +
+      `    {"name":"内容","score":0-4,"max":4,"comment":"日本語の短評"},\n` +
+      `    {"name":"構成","score":0-4,"max":4,"comment":"日本語の短評"},\n` +
+      `    {"name":"語彙","score":0-4,"max":4,"comment":"日本語の短評"},\n` +
+      `    {"name":"文法","score":0-4,"max":4,"comment":"日本語の短評"}\n` +
+      `  ],\n` +
+      `  "summary": "全体の総評（日本語・2〜4文）",\n` +
+      `  "improvements": ["改善点1","改善点2","改善点3"]\n` +
+      `}`;
+  } else if (mode === "model") {
     // ---------- 模範解答生成 ----------
     systemPrompt =
       "あなたは英検ライティング指導の専門家です。与えられたお題に対し、" +
@@ -145,7 +196,7 @@ module.exports = async function handler(req, res) {
     const text =
       (data.content && data.content[0] && data.content[0].text) || "";
 
-    if (mode === "model") {
+    if (mode === "model" || mode === "summary-model") {
       return res.status(200).json({ model: text.trim() });
     }
 

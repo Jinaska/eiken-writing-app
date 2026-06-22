@@ -41,12 +41,23 @@ const LEVELS = [
     ],
   },
   {
+    id: "grade-p2plus", label: "準2級プラス", words: "50〜60語", type: "opinion",
+    usePoints: 0, reasons: 2,
+    instructions: [
+      "あなたは、外国人の知り合いから以下のQUESTIONをされました。",
+      "QUESTIONについて、あなたの意見とその理由を2つ英文で書きなさい。",
+      "語数の目安は50語〜60語です。",
+      "解答がQUESTIONに対応していないと判断された場合は、0点と採点されることがあります。QUESTIONをよく読んでから答えてください。",
+    ],
+  },
+  {
     id: "grade-pre-2", label: "準2級", words: "50〜60語", type: "opinion",
     usePoints: 0, reasons: 2,
     instructions: [
-      "以下のQUESTIONについて、あなたの意見とその理由を2つ書きなさい。",
-      "POINTSは理由を書く際の参考です。これら以外の観点から書いてもかまいません。",
+      "あなたは、外国人の知り合いから以下のQUESTIONをされました。",
+      "QUESTIONについて、あなたの意見とその理由を2つ英文で書きなさい。",
       "語数の目安は50語〜60語です。",
+      "解答がQUESTIONに対応していないと判断された場合は、0点と採点されることがあります。QUESTIONをよく読んでから答えてください。",
     ],
   },
   {
@@ -99,19 +110,23 @@ const QUESTIONS = {
     { id: "g2-7", topic: "In some Japanese university programs, students must study abroad for one year. Do you think the number of such programs will increase in the future?",
       points: ["Cost", "Work", "Communication"] },
   ],
+  // 準2級プラス（POINTSなし・意見＋理由2つ・50〜60語）。やや社会的な話題。
+  "grade-p2plus": [
+    { id: "ppp-1", topic: "Do you think translation apps can help people communicate with visitors from other countries?", points: [] },
+    { id: "ppp-2", topic: "Do you think it is a good idea for high school students to use AI when they study?", points: [] },
+    { id: "ppp-3", topic: "Do you think more people will shop online in the future?", points: [] },
+    { id: "ppp-4", topic: "Do you think schools should teach students how to manage money?", points: [] },
+    { id: "ppp-5", topic: "Do you think it is better to live in a city than in the countryside?", points: [] },
+    { id: "ppp-6", topic: "Do you think people should use public transportation more often?", points: [] },
+  ],
+  // 準2級（POINTSなし・意見＋理由2つ・50〜60語）。身近な話題。
   "grade-pre-2": [
-    { id: "pp2-1", topic: "Which do you like better, studying in the morning or at night?",
-      points: ["Concentration", "Free time"] },
-    { id: "pp2-2", topic: "Do you think it is good to play sports on weekends?",
-      points: ["Health", "Friends"] },
-    { id: "pp2-3", topic: "Which do you prefer, reading books or watching movies?",
-      points: ["Imagination", "Time"] },
-    { id: "pp2-4", topic: "Do you think students should wear school uniforms?",
-      points: ["Cost", "Freedom"] },
-    { id: "pp2-5", topic: "Which do you like better, traveling in Japan or abroad?",
-      points: ["Language", "Culture"] },
-    { id: "pp2-6", topic: "Do you think it is important to eat breakfast every day?",
-      points: ["Energy", "Health"] },
+    { id: "pp2-1", topic: "Do you think robots that can do housework are good for families?", points: [] },
+    { id: "pp2-2", topic: "Do you think students should join a club at school?", points: [] },
+    { id: "pp2-3", topic: "Do you think it is good to have a pet?", points: [] },
+    { id: "pp2-4", topic: "Do you think it is important to eat breakfast every day?", points: [] },
+    { id: "pp2-5", topic: "Do you think students should wear school uniforms?", points: [] },
+    { id: "pp2-6", topic: "Do you think it is good to study during summer vacation?", points: [] },
   ],
   "grade-3": [
     { id: "g3-1", topic: "Which season do you like the best?", points: [] },
